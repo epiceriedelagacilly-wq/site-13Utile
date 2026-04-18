@@ -1,1 +1,693 @@
-Bienvenue à la supérette 13Utile
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L'Épicerie de La Gacilly</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --vert: #2d4a2d;
+      --vert-clair: #4a7a4a;
+      --creme: #f5f0e8;
+      --or: #c8a84b;
+      --terre: #8b6635;
+      --blanc: #fdfbf7;
+      --texte: #1a1a1a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--blanc);
+      color: var(--texte);
+      overflow-x: hidden;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(253,251,247,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(200,168,75,0.2);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--vert);
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+    }
+    .logo span { color: var(--or); font-style: italic; }
+
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a {
+      text-decoration: none;
+      color: var(--vert);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: var(--or); }
+
+    .btn-boutique {
+      background: var(--vert);
+      color: var(--creme) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2px;
+      transition: background 0.3s !important;
+    }
+    .btn-boutique:hover { background: var(--or) !important; color: var(--vert) !important; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      background: var(--vert);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 5% 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(74,122,74,0.4) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(200,168,75,0.15) 0%, transparent 50%);
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--or);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      color: var(--creme);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+    .hero h1 em { color: var(--or); font-style: italic; }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: rgba(245,240,232,0.8);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+
+    .btn-primary {
+      background: var(--or);
+      color: var(--vert);
+      padding: 0.9rem 2rem;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .btn-primary:hover { background: var(--creme); transform: translateY(-2px); }
+
+    .btn-secondary {
+      border: 1px solid rgba(245,240,232,0.4);
+      color: var(--creme);
+      padding: 0.9rem 2rem;
+      text-decoration: none;
+      font-weight: 300;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .btn-secondary:hover { border-color: var(--or); color: var(--or); }
+
+    .hero-badges {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 1s forwards;
+    }
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(245,240,232,0.7);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+    .badge-icon { color: var(--or); font-size: 1rem; }
+
+    /* ─── RUBAN ─── */
+    .ruban {
+      background: var(--or);
+      padding: 0.8rem 5%;
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .ruban-item {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--vert);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 6rem 5%; }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--or);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--vert);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: #555;
+      font-weight: 300;
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    /* ─── RAYONS ─── */
+    #rayons { background: var(--creme); }
+
+    .rayons-intro { max-width: 500px; margin-bottom: 3rem; }
+
+    .rayons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .rayon-card {
+      background: var(--blanc);
+      padding: 2rem;
+      border-radius: 4px;
+      border-left: 3px solid var(--or);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .rayon-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(45,74,45,0.1); }
+
+    .rayon-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .rayon-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--vert);
+      margin-bottom: 0.6rem;
+    }
+    .rayon-card p { font-size: 0.9rem; color: #666; font-weight: 300; line-height: 1.6; }
+
+    /* ─── PRODUITS LOCAUX ─── */
+    #local { background: var(--vert); }
+    #local .section-title { color: var(--creme); }
+    #local .section-desc { color: rgba(245,240,232,0.75); }
+
+    .local-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .local-item {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(200,168,75,0.3);
+      padding: 1.5rem 1rem;
+      text-align: center;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    .local-item:hover { background: rgba(200,168,75,0.15); }
+    .local-item .emoji { font-size: 2rem; margin-bottom: 0.8rem; }
+    .local-item p { color: var(--creme); font-size: 0.9rem; font-weight: 300; }
+
+    /* ─── CAVE À VINS ─── */
+    #cave { background: var(--blanc); }
+
+    .cave-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .cave-visuel {
+      background: var(--vert);
+      border-radius: 4px;
+      padding: 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cave-visuel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(200,168,75,0.2) 0%, transparent 70%);
+    }
+    .cave-visuel .wine-icon { font-size: 5rem; position: relative; }
+    .cave-visuel p {
+      color: var(--creme);
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      position: relative;
+    }
+
+    .cave-features { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+    .cave-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--creme);
+      border-radius: 4px;
+    }
+    .cave-feature-icon { color: var(--or); font-size: 1.2rem; flex-shrink: 0; }
+    .cave-feature h4 { font-size: 0.95rem; color: var(--vert); margin-bottom: 0.2rem; }
+    .cave-feature p { font-size: 0.85rem; color: #666; font-weight: 300; }
+
+    /* ─── INFOS PRATIQUES ─── */
+    #infos { background: var(--creme); }
+
+    .infos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .info-card {
+      background: var(--blanc);
+      padding: 2rem;
+      border-radius: 4px;
+      border-top: 3px solid var(--vert);
+    }
+    .info-card h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--vert);
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .horaires-list { list-style: none; }
+    .horaires-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.4rem 0;
+      font-size: 0.9rem;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      color: #444;
+    }
+    .horaires-list li:last-child { border-bottom: none; }
+    .horaires-list .fermé { color: #c0392b; }
+    .horaires-list .ouvert { color: var(--vert-clair); font-weight: 500; }
+    .dimanche { background: rgba(200,168,75,0.1); padding: 0.4rem 0.5rem; border-radius: 2px; }
+
+    .adresse-content p { font-size: 0.95rem; color: #555; line-height: 1.8; font-weight: 300; }
+    .adresse-content strong { color: var(--vert); }
+
+    .fidelite-content p { font-size: 0.9rem; color: #555; line-height: 1.7; font-weight: 300; }
+    .fidelite-badge {
+      display: inline-block;
+      background: var(--or);
+      color: var(--vert);
+      padding: 0.3rem 0.8rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border-radius: 2px;
+      margin-top: 0.8rem;
+    }
+
+    /* ─── BOUTIQUE EN LIGNE ─── */
+    #boutique {
+      background: var(--vert);
+      text-align: center;
+      padding: 5rem 5%;
+    }
+    #boutique .section-title { color: var(--creme); }
+    #boutique .section-desc { color: rgba(245,240,232,0.75); margin: 0 auto 2.5rem; text-align: center; }
+
+    .boutique-badge {
+      display: inline-block;
+      background: rgba(200,168,75,0.2);
+      border: 1px solid var(--or);
+      color: var(--or);
+      padding: 0.4rem 1.2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #111;
+      color: rgba(255,255,255,0.5);
+      padding: 2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.8rem;
+    }
+    footer .footer-logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--or);
+      font-size: 1rem;
+    }
+    footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+    footer a:hover { color: var(--or); }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .cave-content { grid-template-columns: 1fr; }
+      .hero-badges { gap: 1rem; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">L'Épicerie<br><span>de La Gacilly</span></div>
+    <nav>
+      <a href="#rayons">Nos rayons</a>
+      <a href="#local">Produits locaux</a>
+      <a href="#cave">Cave à vins</a>
+      <a href="#infos">Infos pratiques</a>
+      <a href="#boutique" class="btn-boutique">Boutique en ligne</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">✦ Épicerie généraliste &amp; produits locaux ✦</p>
+      <h1>L'Épicerie<br><em>de La Gacilly</em></h1>
+      <p class="hero-desc">
+        Au cœur de La Gacilly, votre épicerie de quartier vous propose une sélection soignée de produits frais, surgelés, conserves, produits d'entretien et une belle cave à vins bio.
+      </p>
+      <div class="hero-cta">
+        <a href="#rayons" class="btn-primary">Découvrir nos rayons</a>
+        <a href="#infos" class="btn-secondary">Horaires &amp; accès</a>
+      </div>
+      <div class="hero-badges">
+        <div class="badge"><span class="badge-icon">📍</span> Plein centre-ville</div>
+        <div class="badge"><span class="badge-icon">🅿️</span> Parking à proximité</div>
+        <div class="badge"><span class="badge-icon">📅</span> Ouvert les dimanches</div>
+        <div class="badge"><span class="badge-icon">🌿</span> Produits locaux &amp; bio</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RUBAN -->
+  <div class="ruban">
+    <div class="ruban-item">🕘 Ouvert du mardi au dimanche</div>
+    <div class="ruban-item">🎉 Ouvert les jours fériés</div>
+    <div class="ruban-item">🃏 Compte de fidélité disponible</div>
+    <div class="ruban-item">🌿 Vins bio récoltants</div>
+  </div>
+
+  <!-- RAYONS -->
+  <section id="rayons">
+    <div class="rayons-intro reveal">
+      <p class="section-label">Ce que nous proposons</p>
+      <h2 class="section-title">Tous vos besoins du quotidien</h2>
+      <p class="section-desc">Une épicerie complète pour toute la famille, avec des produits de qualité à prix accessibles.</p>
+    </div>
+    <div class="rayons-grid">
+      <div class="rayon-card reveal">
+        <div class="rayon-icon">🥦</div>
+        <h3>Produits frais</h3>
+        <p>Fruits, légumes, produits laitiers, charcuterie et tout ce dont vous avez besoin au quotidien.</p>
+      </div>
+      <div class="rayon-card reveal">
+        <div class="rayon-icon">❄️</div>
+        <h3>Surgelés</h3>
+        <p>Une large gamme de produits surgelés pour faciliter vos repas de la semaine.</p>
+      </div>
+      <div class="rayon-card reveal">
+        <div class="rayon-icon">🥫</div>
+        <h3>Conserves &amp; épicerie</h3>
+        <p>Conserves, pâtes, riz, sauces et tous les essentiels de votre garde-manger.</p>
+      </div>
+      <div class="rayon-card reveal">
+        <div class="rayon-icon">🍽️</div>
+        <h3>Plats préparés</h3>
+        <p>Des plats préparés savoureux pour les soirs où vous manquez de temps.</p>
+      </div>
+      <div class="rayon-card reveal">
+        <div class="rayon-icon">🧴</div>
+        <h3>Hygiène &amp; beauté</h3>
+        <p>Produits d'hygiène, de beauté et de soin pour toute la famille.</p>
+      </div>
+      <div class="rayon-card reveal">
+        <div class="rayon-icon">🧹</div>
+        <h3>Entretien</h3>
+        <p>Tout pour l'entretien de votre maison : lessive, nettoyants, produits ménagers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUITS LOCAUX -->
+  <section id="local">
+    <div class="reveal">
+      <p class="section-label">Fait près de chez vous</p>
+      <h2 class="section-title">Nos produits locaux</h2>
+      <p class="section-desc">Nous sélectionnons avec soin des producteurs locaux pour vous offrir le meilleur de la région.</p>
+    </div>
+    <div class="local-grid">
+      <div class="local-item reveal">
+        <div class="emoji">🍯</div>
+        <p>Miel local</p>
+      </div>
+      <div class="local-item reveal">
+        <div class="emoji">🫒</div>
+        <p>Huile artisanale</p>
+      </div>
+      <div class="local-item reveal">
+        <div class="emoji">🍶</div>
+        <p>Vinaigre</p>
+      </div>
+      <div class="local-item reveal">
+        <div class="emoji">🍎</div>
+        <p>Jus de pomme</p>
+      </div>
+      <div class="local-item reveal">
+        <div class="emoji">🍺</div>
+        <p>Bières locales</p>
+      </div>
+      <div class="local-item reveal">
+        <div class="emoji">🌿</div>
+        <p>Produits bio</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAVE À VINS -->
+  <section id="cave">
+    <div class="cave-content">
+      <div class="cave-visuel reveal">
+        <div class="wine-icon">🍷</div>
+        <p>"Des vins d'exception,<br>choisis avec passion"</p>
+      </div>
+      <div class="reveal">
+        <p class="section-label">Notre sélection</p>
+        <h2 class="section-title">Cave à vins<br>bio &amp; récoltants</h2>
+        <p class="section-desc">Une cave soigneusement sélectionnée pour vous proposer des vins de qualité, bio et issus de récoltants, à des prix accessibles.</p>
+        <div class="cave-features">
+          <div class="cave-feature">
+            <span class="cave-feature-icon">🌿</span>
+            <div>
+              <h4>100% Bio</h4>
+              <p>Tous nos vins sont issus de l'agriculture biologique, respectueux de l'environnement.</p>
+            </div>
+          </div>
+          <div class="cave-feature">
+            <span class="cave-feature-icon">👨‍🌾</span>
+            <div>
+              <h4>Vins de récoltants</h4>
+              <p>Directement des producteurs, pour garantir authenticité et traçabilité.</p>
+            </div>
+          </div>
+          <div class="cave-feature">
+            <span class="cave-feature-icon">💰</span>
+            <div>
+              <h4>Prix accessibles</h4>
+              <p>Une sélection de qualité à prix maîtrisés, pour que le bon vin soit accessible à tous.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFOS PRATIQUES -->
+  <section id="infos">
+    <div class="reveal">
+      <p class="section-label">Venez nous rendre visite</p>
+      <h2 class="section-title">Infos pratiques</h2>
+    </div>
+    <div class="infos-grid">
+      <div class="info-card reveal">
+        <h3>🕘 Horaires d'ouverture</h3>
+        <ul class="horaires-list">
+          <li><span>Lundi</span><span class="fermé">Fermé</span></li>
+          <li><span>Mardi</span><span class="ouvert">08h15 – 19h30</span></li>
+          <li><span>Mercredi</span><span class="ouvert">08h15 – 19h30</span></li>
+          <li><span>Jeudi</span><span class="ouvert">08h15 – 19h30</span></li>
+          <li><span>Vendredi</span><span class="ouvert">08h15 – 19h30</span></li>
+          <li><span>Samedi</span><span class="ouvert">08h30 – 19h30</span></li>
+          <li class="dimanche"><span>Dimanche</span><span class="ouvert">09h00 – 19h30</span></li>
+          <li><span>Jours fériés</span><span class="ouvert">Ouvert</span></li>
+        </ul>
+      </div>
+      <div class="info-card reveal">
+        <h3>📍 Nous trouver</h3>
+        <div class="adresse-content">
+          <p>
+            <strong>L'Épicerie de La Gacilly</strong><br>
+            13 Rue Montauban<br>
+            56200 La Gacilly<br><br>
+            🅿️ <strong>Parking à proximité immédiate</strong><br>
+            Situé en plein centre-ville,<br>facilement accessible à pied.
+          </p>
+        </div>
+      </div>
+      <div class="info-card reveal">
+        <h3>🃏 Compte de fidélité</h3>
+        <div class="fidelite-content">
+          <p>
+            Profitez de notre programme de fidélité et bénéficiez d'avantages exclusifs à chaque visite.<br><br>
+            Demandez votre carte de fidélité directement en magasin auprès de notre équipe.
+          </p>
+          <span class="fidelite-badge">À demander en magasin</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOUTIQUE EN LIGNE -->
+  <section id="boutique">
+    <div class="reveal">
+      <div class="boutique-badge">Bientôt disponible</div>
+      <p class="section-label">Notre boutique en ligne</p>
+      <h2 class="section-title">L'Épicerie de La Gacilly<br>arrive en ligne</h2>
+      <p class="section-desc">
+        Retrouvez bientôt tous nos produits sur notre boutique en ligne. Commandez depuis chez vous et venez retirer vos achats en magasin.
+      </p>
+      <a href="#" class="btn-primary" style="display:inline-block; opacity:0.6; cursor:default;">Boutique en ligne — Bientôt disponible</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">L'Épicerie de La Gacilly</div>
+    <div>13 Rue Montauban — 56200 La Gacilly</div>
+    <div>
+      <a href="mailto:contact@epiceriedelagacilly.fr">contact@epiceriedelagacilly.fr</a>
+    </div>
+    <div>© 2025 L'Épicerie de La Gacilly</div>
+  </footer>
+
+  <script>
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
