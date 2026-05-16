@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - 13utile</title>
+    
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    
+    .contact-page {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #28a745;
+      text-decoration: none;
+    }
+    
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .contact-form label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #555;
+    }
+    
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    
+    .contact-form button {
+      margin-top: 20px;
+      padding: 14px 40px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      width: 100%;
+    }
+    
+    .contact-form button:hover {
+      background-color: #218838;
+    }
+    </style>
+</head>
+<body>
+    
+<div class="contact-page">
+    <a href="index.html" class="back-link">← Retour à l'accueil</a>
+    
+    <h1>Contactez-nous</h1>
+    
+    <div class="contact-form">
+      <form action="https://formspree.io/f/maqvrgvo" method="POST">
+        
+        <label for="name">Nom et Prénom *</label>
+        <input type="text" name="name" id="name" required>
+        
+        <label for="email">Email *</label>
+        <input type="email" name="email" id="email" required>
+        
+        <label for="phone">Téléphone</label>
+        <input type="tel" name="phone" id="phone" placeholder="06 12 34 56 78">
+        
+        <label for="subject">Sujet</label>
+        <select name="subject" id="subject">
+          <option value="info">Demande d'information</option>
+          <option value="commande">Passer une commande</option>
+          <option value="livraison">Question sur la livraison</option>
+          <option value="autre">Autre</option>
+        </select>
+        
+        <label for="message">Message *</label>
+        <textarea name="message" id="message" rows="5" required></textarea>
+        
+        <p style="font-size: 14px; color: #666; margin-top: 10px;">* Champs obligatoires</p>
+        
+        <button type="submit">Envoyer</button>
+        
+      </form>
+    </div>
+</div>
+
+</body>
+</html>
